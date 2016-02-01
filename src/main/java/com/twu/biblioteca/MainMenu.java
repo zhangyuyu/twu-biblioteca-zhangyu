@@ -1,12 +1,15 @@
 package com.twu.biblioteca;
 
 public enum MainMenu {
-    LIST_BOOKS;
+    LIST_BOOKS("List Books"), QUIT("Quit");
 
     private String message;
 
     MainMenu() {
-        this.message = "List Books";
+    }
+
+    MainMenu(String message) {
+        this.message = message;
     }
 
     @Override

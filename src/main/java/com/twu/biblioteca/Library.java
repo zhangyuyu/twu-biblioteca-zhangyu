@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.twu.biblioteca.MainMenu.LIST_BOOKS;
+import static com.twu.biblioteca.MainMenu.QUIT;
 import static java.lang.String.format;
 import static org.apache.commons.io.FileUtils.readFileToString;
 
@@ -43,6 +44,7 @@ public class Library {
 
     private void prepareMenuMap() {
         menuMap.put("1", LIST_BOOKS);
+        menuMap.put("2", QUIT);
     }
 
     public String getMenuValue(String number) {
