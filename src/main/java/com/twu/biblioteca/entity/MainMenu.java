@@ -1,4 +1,4 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.entity;
 
 public enum MainMenu {
     LIST_BOOKS("List Books"), QUIT("Quit");

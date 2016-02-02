@@ -1,8 +1,10 @@
 package com.twu.biblioteca;
 
-import static com.twu.biblioteca.ConsoleUtil.getInputNum;
-import static com.twu.biblioteca.MainMenu.LIST_BOOKS;
-import static com.twu.biblioteca.MainMenu.QUIT;
+import com.twu.biblioteca.entity.Library;
+
+import static com.twu.biblioteca.util.ConsoleUtil.getInputNum;
+import static com.twu.biblioteca.entity.MainMenu.LIST_BOOKS;
+import static com.twu.biblioteca.entity.MainMenu.QUIT;
 
 public class BibliotecaApp {
 
