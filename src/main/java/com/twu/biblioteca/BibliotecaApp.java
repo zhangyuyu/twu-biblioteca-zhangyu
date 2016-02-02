@@ -2,10 +2,10 @@ package com.twu.biblioteca;
 
 import com.twu.biblioteca.entity.Library;
 
-import static com.twu.biblioteca.util.ConsoleUtil.getInputNum;
 import static com.twu.biblioteca.entity.MainMenu.LIST_BOOKS;
 import static com.twu.biblioteca.entity.MainMenu.QUIT;
-import static java.lang.Integer.parseInt;
+import static com.twu.biblioteca.util.ConsoleUtil.getInputNum;
+import static com.twu.biblioteca.util.ConsoleUtil.getInputString;
 
 public class BibliotecaApp {
 
@@ -18,7 +18,8 @@ public class BibliotecaApp {
     }
 
     private static void chooseCheckoutOption(Library library) {
-        library.checkout(parseInt(getInputNum()));
+        String message = library.checkout(getInputString());
+        System.out.println(message);
     }
 
     private static void chooseMenuOption(Library library) {

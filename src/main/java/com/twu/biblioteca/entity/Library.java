@@ -50,12 +50,17 @@ public class Library {
     public void listAvailableBooks() {
         bookList.stream()
                 .filter(Book::isAvailable)
-                .forEach(book -> System.out.println(
-                        format("%s. %s", bookList.indexOf(book), book)));
+                .forEach(System.out::println);
     }
 
-    public void checkout(int number) {
-        bookList.get(number).setIsAvaliable(false);
+    public String checkout(String name) {
+        for (Book book : bookList) {
+            if(book.getTitle().equals(name) && book.isAvailable()){
+                book.setIsAvaliable(false);
+                return "Thank you! Enjoy the book.";
+            }
+        }
+        return "That book is not available.";
     }
 
     public List<Book> getBooksFromFile() {
