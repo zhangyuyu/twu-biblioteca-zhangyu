@@ -1,10 +1,10 @@
 package com.twu.biblioteca.entity;
 
+import com.twu.biblioteca.exception.ReadFileException;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +18,7 @@ public class Library {
 
     private String name;
     private Map<String, Enum> menuMap = new HashMap<>();
-    public List<Book> bookList = new ArrayList<Book>();
+    public List<Book> bookList = getBooksFromFile();
 
     public Library(String name) {
         this.name = name;
@@ -31,7 +31,7 @@ public class Library {
     public void showMainMenu() {
         prepareMenuMap();
         System.out.println("------------------------------------");
-        for (String key :menuMap.keySet()) {
+        for (String key : menuMap.keySet()) {
             System.out.println(format("- %s. %s ", key, getMenuValue(key)));
         }
         System.out.println("------------------------------------");
@@ -47,20 +47,29 @@ public class Library {
         return menuMap.get(number).toString();
     }
 
-    public void listBooks(String filePath) {
+    public void listAvailableBooks() {
+        bookList.stream()
+                .filter(Book::isAvailable)
+                .forEach(book -> System.out.println(
+                        format("%s. %s", bookList.indexOf(book), book)));
+    }
+
+    public void checkout(int number) {
+        bookList.get(number).setIsAvaliable(false);
+    }
+
+    public List<Book> getBooksFromFile() {
         try {
-            bookList = FileUtils.readLines(new File(filePath))
+            return FileUtils.readLines(new File("src/main/resources/libraryBooks"))
                     .stream()
                     .map(this::getBook)
                     .collect(toList());
-
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new ReadFileException(e.getMessage());
         }
     }
 
     private Book getBook(String line) {
-        System.out.println(line);
         Book book = new Book();
         String[] columns = line.split(",");
         book.setTitle(columns[0].trim());

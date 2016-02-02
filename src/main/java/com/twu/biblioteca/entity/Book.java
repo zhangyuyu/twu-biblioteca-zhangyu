@@ -1,10 +1,12 @@
 package com.twu.biblioteca.entity;
 
+import static java.lang.String.format;
+
 public class Book {
     private String title;
     private String author;
     private String publish;
-    private boolean isAvaliable;
+    private boolean isAvailable = true;
     private String owner;
 
     public String getTitle() {
@@ -39,11 +41,16 @@ public class Book {
         this.owner = owner;
     }
 
-    public boolean isAvaliable() {
-        return isAvaliable;
+    public boolean isAvailable() {
+        return isAvailable;
     }
 
     public void setIsAvaliable(boolean isAvaliable) {
-        this.isAvaliable = isAvaliable;
+        this.isAvailable = isAvaliable;
+    }
+
+    @Override
+    public String toString() {
+        return format("[ %s ] - %s %s", title, author, publish);
     }
 }
