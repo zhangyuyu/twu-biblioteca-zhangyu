@@ -9,8 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.twu.biblioteca.entity.MainMenu.LIST_BOOKS;
-import static com.twu.biblioteca.entity.MainMenu.QUIT;
+import static com.twu.biblioteca.entity.MainMenu.*;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 
@@ -30,17 +29,19 @@ public class Library {
 
     public void showMainMenu() {
         prepareMenuMap();
-        System.out.println("------------------------------------");
+        System.out.println("------------------------------------\n");
         for (String key : menuMap.keySet()) {
             System.out.println(format("- %s. %s ", key, getMenuValue(key)));
         }
-        System.out.println("------------------------------------");
+        System.out.println("\n------------------------------------");
         System.out.println("Please enter your option:");
     }
 
     private void prepareMenuMap() {
         menuMap.put("1", LIST_BOOKS);
         menuMap.put("2", QUIT);
+        menuMap.put("3", CHECKOUT_BOOK);
+        menuMap.put("4", RETURN_BOOK);
     }
 
     public String getMenuValue(String number) {
@@ -55,12 +56,22 @@ public class Library {
 
     public String checkout(String name) {
         for (Book book : bookList) {
-            if(book.getTitle().equals(name) && book.isAvailable()){
+            if (book.getTitle().equalsIgnoreCase(name) && book.isAvailable()) {
                 book.setIsAvaliable(false);
                 return "Thank you! Enjoy the book.";
             }
         }
         return "That book is not available.";
+    }
+
+    public String returnBook(String name) {
+        for (Book book : bookList) {
+            if (book.getTitle().equalsIgnoreCase(name) && !book.isAvailable()) {
+                book.setIsAvaliable(true);
+                return "Thank you for returning the book.";
+            }
+        }
+        return "That is not a valid book to return.";
     }
 
     public List<Book> getBooksFromFile() {

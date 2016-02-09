@@ -1,12 +1,12 @@
 package com.twu.biblioteca.entity;
 
 public enum MainMenu {
-    LIST_BOOKS("List Books"), QUIT("Quit");
+    LIST_BOOKS("List Books"),
+    QUIT("Quit"),
+    CHECKOUT_BOOK("Checkout Book"),
+    RETURN_BOOK("Return Book");
 
     private String message;
-
-    MainMenu() {
-    }
 
     MainMenu(String message) {
         this.message = message;
