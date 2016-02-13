@@ -1,9 +1,9 @@
 package com.twu.biblioteca.handler;
 
-import com.twu.biblioteca.entity.Book;
+import com.twu.biblioteca.entity.Item;
 
 import java.util.List;
 
-public interface Handler {
-    void handle(List<Book> bookList);
+public interface Handler <E extends Item>{
+    void handle(List<E> itemList);
 }

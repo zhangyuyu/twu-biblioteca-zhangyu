@@ -3,10 +3,11 @@ package com.twu.biblioteca.entity;
 import com.twu.biblioteca.handler.*;
 
 public enum MainMenu {
-    LIST_BOOKS("List Books", new ListBooksHandler()),
+    LIST_BOOKS("List Books", new ListHandler<Book>()),
     QUIT("Quit", new QuitProcessHandler()),
     CHECKOUT_BOOK("Checkout Book", new CheckoutHandler()),
-    RETURN_BOOK("Return Book", new ReturnHandler());
+    RETURN_BOOK("Return Book", new ReturnHandler()),
+    LIST_MOVIES("List Movies", new ListHandler<Movie>());
 
     private String message;
     private Handler handler;

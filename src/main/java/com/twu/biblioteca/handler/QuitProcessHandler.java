@@ -1,12 +1,12 @@
 package com.twu.biblioteca.handler;
 
-import com.twu.biblioteca.entity.Book;
+import com.twu.biblioteca.entity.Item;
 
 import java.util.List;
 
-public class QuitProcessHandler implements Handler{
+public class QuitProcessHandler<E extends Item> implements Handler<E>{
     @Override
-    public void handle(List<Book> bookList) {
+    public void handle(List<E> itemList) {
         System.exit(0);
     }
 }

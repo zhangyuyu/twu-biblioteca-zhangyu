@@ -15,6 +15,7 @@ public class Handlers {
             put("2", QUIT);
             put("3", CHECKOUT_BOOK);
             put("4", RETURN_BOOK);
+            put("5", LIST_MOVIES);
         }
     };
 

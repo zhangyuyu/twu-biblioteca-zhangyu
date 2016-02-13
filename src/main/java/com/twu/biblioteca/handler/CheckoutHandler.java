@@ -1,25 +1,25 @@
 package com.twu.biblioteca.handler;
 
-import com.twu.biblioteca.entity.Book;
+import com.twu.biblioteca.entity.Item;
 
 import java.util.List;
 
 import static com.twu.biblioteca.util.ConsoleUtil.getInputString;
 
-public class CheckoutHandler implements Handler {
-    @Override
-    public void handle(List<Book> bookList) {
-        System.out.println("Please enter the name of book:");
-        System.out.println(checkoutBook(getInputString(), bookList));
-    }
-
-    public String checkoutBook(String name, List<Book> bookList) {
-        for (Book book : bookList) {
-            if (book.getTitle().equalsIgnoreCase(name) && book.isAvailable()) {
-                book.setIsAvaliable(false);
-                return "Thank you! Enjoy the book.";
+public class CheckoutHandler<E extends Item> implements Handler<E> {
+    public String checkoutItem(String name, List<E> itemList) {
+        for (E item : itemList) {
+            if (item.getName().equalsIgnoreCase(name) && item.isAvailable()) {
+                item.setIsAvaliable(false);
+                return "Thank you! Enjoy the item.";
             }
         }
-        return "That book is not available.";
+        return "That item is not available.";
+    }
+
+    @Override
+    public void handle(List<E> itemList) {
+        System.out.println("Please enter the name of item:");
+        System.out.println(checkoutItem(getInputString(), itemList));
     }
 }

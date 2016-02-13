@@ -1,25 +1,26 @@
 package com.twu.biblioteca.handler;
 
-import com.twu.biblioteca.entity.Book;
+import com.twu.biblioteca.entity.Item;
 
 import java.util.List;
 
 import static com.twu.biblioteca.util.ConsoleUtil.getInputString;
 
-public class ReturnHandler implements Handler{
+
+public class ReturnHandler<E extends Item> implements Handler<E>{
     @Override
-    public void handle(List<Book> bookList) {
+    public void handle(List<E> itemList) {
         System.out.println("Please enter the name of book:");
-        System.out.println(returnBook(getInputString(), bookList));
+        System.out.println(returnItem(getInputString(), itemList));
     }
 
-    public String returnBook(String name,List<Book> bookList) {
-        for (Book book : bookList) {
-            if (book.getTitle().equalsIgnoreCase(name) && !book.isAvailable()) {
-                book.setIsAvaliable(true);
-                return "Thank you for returning the book.";
+    public String returnItem(String name, List<E> itemList) {
+        for (E item : itemList) {
+            if (item.getName().equalsIgnoreCase(name) && !item.isAvailable()) {
+                item.setIsAvaliable(true);
+                return "Thank you for returning the item.";
             }
         }
-        return "That is not a valid book to return.";
+        return "That is not a valid item to return.";
     }
 }
