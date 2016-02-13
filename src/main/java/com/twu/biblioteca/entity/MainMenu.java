@@ -5,9 +5,10 @@ import com.twu.biblioteca.handler.*;
 public enum MainMenu {
     LIST_BOOKS("List Books", new ListHandler<Book>()),
     QUIT("Quit", new QuitProcessHandler()),
-    CHECKOUT_BOOK("Checkout Book", new CheckoutHandler()),
+    CHECKOUT_BOOK("Checkout Book", new CheckoutHandler<Book>()),
     RETURN_BOOK("Return Book", new ReturnHandler()),
-    LIST_MOVIES("List Movies", new ListHandler<Movie>());
+    LIST_MOVIES("List Movies", new ListHandler<Movie>()),
+    CHECKOUT_MOVIE("Checkout Movie", new CheckoutHandler<Movie>());
 
     private String message;
     private Handler handler;

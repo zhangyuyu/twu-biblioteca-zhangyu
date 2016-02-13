@@ -16,6 +16,7 @@ public class Handlers {
             put("3", CHECKOUT_BOOK);
             put("4", RETURN_BOOK);
             put("5", LIST_MOVIES);
+            put("6", CHECKOUT_MOVIE);
         }
     };
 
