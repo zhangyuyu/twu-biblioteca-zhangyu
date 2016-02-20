@@ -19,7 +19,7 @@ public class DefaultAccountDao implements AccountDao {
                         && (account.getPassword().equals(password)));
     }
 
-    private List<Account> getAccountsFromFile() {
+    public List<Account> getAccountsFromFile() {
         try {
             return FileUtils.readLines(new File("src/main/resources/accounts"))
                     .stream()

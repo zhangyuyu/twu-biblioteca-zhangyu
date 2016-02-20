@@ -63,6 +63,12 @@ public class Library {
 
     }
 
+    public void printCheckoutAccount(){
+        bookDao.getBooksFromFile().stream()
+                .filter(book -> !book.isAvailable())
+                .forEach(book -> System.out.println(book.getHolder()));
+    }
+
     public Library(String name) {
         this.name = name;
     }
