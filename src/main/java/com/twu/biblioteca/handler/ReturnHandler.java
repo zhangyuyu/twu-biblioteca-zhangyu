@@ -7,9 +7,10 @@ import java.util.List;
 import static com.twu.biblioteca.util.ConsoleUtil.getInputString;
 
 
-public class ReturnHandler<E extends Item> implements Handler<E>{
+public class ReturnHandler<E extends Item> implements Handler<E> {
+
     @Override
-    public void handle(List<E> itemList) {
+    public void handle(List<E> itemList, String libraryNum) {
         System.out.println("Please enter the name of book:");
         System.out.println(returnItem(getInputString(), itemList));
     }
@@ -17,7 +18,8 @@ public class ReturnHandler<E extends Item> implements Handler<E>{
     public String returnItem(String name, List<E> itemList) {
         for (E item : itemList) {
             if (item.getName().equalsIgnoreCase(name) && !item.isAvailable()) {
-                item.setIsAvaliable(true);
+                item.setIsAvailable(true);
+                item.setHolder(null);
                 return "Thank you for returning the item.";
             }
         }

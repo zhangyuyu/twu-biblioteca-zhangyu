@@ -18,8 +18,8 @@ public class Item {
         return isAvailable;
     }
 
-    public void setIsAvaliable(boolean isAvaliable) {
-        this.isAvailable = isAvaliable;
+    public void setIsAvailable(boolean isAvailable) {
+        this.isAvailable = isAvailable;
     }
 
     public String getPublish() {

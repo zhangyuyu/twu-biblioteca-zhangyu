@@ -1,6 +1,7 @@
 package com.twu.biblioteca.handler;
 
 import com.twu.biblioteca.entity.Customer;
+import com.twu.biblioteca.entity.Item;
 import com.twu.biblioteca.exception.ReadFileException;
 import org.apache.commons.io.FileUtils;
 
@@ -10,9 +11,10 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-public class InformationHandler{
+public class ViewInformationHandler<E extends Item> implements Handler<E> {
 
-    public void handle(String libraryNum) {
+    @Override
+    public void handle(List<E> itemList, String libraryNum) {
         Customer loggedCustomer = getCustomersFromFile().stream()
                 .filter(customer -> customer.getLibraryNum().equals(libraryNum))
                 .findAny().get();

@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.twu.biblioteca.entity.MainMenu.*;
-import static java.lang.String.format;
 
 public class Handlers {
     private static final Map<String, MainMenu> menuMap = new HashMap<String, MainMenu>() {
@@ -21,13 +20,8 @@ public class Handlers {
         }
     };
 
-    public static void showMenuOption() {
-        System.out.println("------------------------------------\n");
-        for (String key : menuMap.keySet()) {
-            System.out.println(format("- %s. %s ", key, findMenuMessage(key)));
-        }
-        System.out.println("\n------------------------------------");
-        System.out.println("Please enter your option:");
+    public static Map<String, MainMenu> getMenuMap() {
+        return menuMap;
     }
 
     public static String findMenuMessage(String menuOption) {

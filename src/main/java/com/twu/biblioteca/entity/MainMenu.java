@@ -9,7 +9,7 @@ public enum MainMenu {
     RETURN_BOOK("Return Book", new ReturnHandler()),
     LIST_MOVIES("List Movies", new ListHandler<Movie>()),
     CHECKOUT_MOVIE("Checkout Movie", new CheckoutHandler<Movie>()),
-    USER_INFORMATION ("User Information");
+    USER_INFORMATION ("User Information", new ViewInformationHandler());
 
     private String message;
     private Handler handler;
@@ -17,10 +17,6 @@ public enum MainMenu {
     MainMenu(String message, Handler handler) {
         this.message = message;
         this.handler = handler;
-    }
-
-    MainMenu(String message) {
-        this.message = message;
     }
 
     @Override
