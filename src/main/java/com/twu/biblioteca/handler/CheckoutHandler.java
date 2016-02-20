@@ -14,7 +14,7 @@ public class CheckoutHandler<E extends Item> implements Handler<E> {
         System.out.println(checkoutItem(getInputString(), itemList, libraryNum));
     }
 
-    public String checkoutItem(String name, List<E> itemList, String libraryNum) {
+    private String checkoutItem(String name, List<E> itemList, String libraryNum) {
         for (E item : itemList) {
             if (item.getName().equalsIgnoreCase(name) && item.isAvailable()) {
                 item.setIsAvailable(false);

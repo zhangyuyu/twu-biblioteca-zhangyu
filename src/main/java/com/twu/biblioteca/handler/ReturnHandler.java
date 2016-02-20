@@ -15,7 +15,7 @@ public class ReturnHandler<E extends Item> implements Handler<E> {
         System.out.println(returnItem(getInputString(), itemList));
     }
 
-    public String returnItem(String name, List<E> itemList) {
+    private String returnItem(String name, List<E> itemList) {
         for (E item : itemList) {
             if (item.getName().equalsIgnoreCase(name) && !item.isAvailable()) {
                 item.setIsAvailable(true);

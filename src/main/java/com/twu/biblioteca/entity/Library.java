@@ -1,8 +1,6 @@
 package com.twu.biblioteca.entity;
 
-import com.twu.biblioteca.dao.DefaultAccountDao;
-import com.twu.biblioteca.dao.DefaultBookDao;
-import com.twu.biblioteca.dao.DefaultMovieDao;
+import com.twu.biblioteca.dao.*;
 import com.twu.biblioteca.handler.Handler;
 
 import java.util.List;
@@ -16,9 +14,9 @@ import static java.lang.String.format;
 public class Library {
 
     private String name;
-    private DefaultAccountDao accountDao = new DefaultAccountDao();
-    private DefaultBookDao bookDao=new DefaultBookDao();
-    private DefaultMovieDao movieDao = new DefaultMovieDao();
+    private AccountDao accountDao = new DefaultAccountDao();
+    private BookDao bookDao=new DefaultBookDao();
+    private MovieDao movieDao = new DefaultMovieDao();
 
     List<Book> bookList = bookDao.getBooksFromFile();
     List<Movie> movieList = movieDao.getMoviesFromFile();

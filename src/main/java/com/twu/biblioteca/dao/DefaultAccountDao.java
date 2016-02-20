@@ -19,6 +19,7 @@ public class DefaultAccountDao implements AccountDao {
                         && (account.getPassword().equals(password)));
     }
 
+    @Override
     public List<Account> getAccountsFromFile() {
         try {
             return FileUtils.readLines(new File("src/main/resources/accounts"))
