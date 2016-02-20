@@ -9,9 +9,10 @@ public class BibliotecaApp {
     public static void main(String[] args) {
         Library library = new Library("Bangalore Public Library");
         library.printlnWelcomeMessage();
+        String libraryNum = library.checkAccount();
         while (true) {
             showMenuOption();
-            library.handleMenuOption();
+            library.handleMenuOption(libraryNum);
         }
     }
 }

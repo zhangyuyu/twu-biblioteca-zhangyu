@@ -2,14 +2,17 @@ package com.twu.biblioteca.entity;
 
 import com.twu.biblioteca.exception.ReadFileException;
 import com.twu.biblioteca.handler.Handler;
+import com.twu.biblioteca.handler.InformationHandler;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.twu.biblioteca.handler.Handlers.findMenuHandler;
 import static com.twu.biblioteca.util.ConsoleUtil.getInputNum;
+import static com.twu.biblioteca.util.ConsoleUtil.getInputString;
 import static java.lang.Integer.parseInt;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
@@ -17,8 +20,9 @@ import static java.util.stream.Collectors.toList;
 public class Library {
 
     private String name;
-    public List<Book> bookList = getBooksFromFile();
-    public List<Movie> movieList = getMoviesFromFile();
+    private List<Book> bookList = getBooksFromFile();
+    private List<Movie> movieList = getMoviesFromFile();
+    private List<String> checkoutLibraryNum = new ArrayList<>();
 
     public Library(String name) {
         this.name = name;
@@ -28,14 +32,18 @@ public class Library {
         System.out.println(format("Welcome to %s !", this.name));
     }
 
-    public void handleMenuOption() {
+    public void handleMenuOption(String libraryNum) {
         String inputNum = getInputNum();
         Handler menuHandler = findMenuHandler(inputNum);
         if (parseInt(inputNum) < 5) {
             menuHandler.handle(bookList);
+        } else if (parseInt(inputNum) == 7) {
+            InformationHandler informationHandler = new InformationHandler();
+            informationHandler.handle(libraryNum);
         } else {
             menuHandler.handle(movieList);
         }
+        checkoutLibraryNum.add(libraryNum);
     }
 
     public List<Book> getBooksFromFile() {
@@ -78,4 +86,48 @@ public class Library {
         movie.setRate(columns[3].trim());
         return movie;
     }
+
+    private List<Account> getAccountsFromFile() {
+        try {
+            return FileUtils.readLines(new File("src/main/resources/accounts"))
+                    .stream()
+                    .map(this::getAccount)
+                    .collect(toList());
+        } catch (IOException e) {
+            throw new ReadFileException(e.getMessage());
+        }
+    }
+
+    private Account getAccount(String line) {
+        Account account = new Account();
+        String[] columns = line.split(",");
+        account.setLibraryNum(columns[0].trim());
+        account.setPassword(columns[1].trim());
+        return account;
+    }
+
+    private boolean isValidAccount(String libraryNumber, String password) {
+        return getAccountsFromFile().stream()
+                .anyMatch(account -> (account.getLibraryNum().equals(libraryNumber))
+                        && (account.getPassword().equals(password)));
+    }
+
+    public String checkAccount() {
+        System.out.println("please enter your library number:");
+        String libraryNumber = getInputString();
+
+        System.out.println("please enter your password:");
+        String password = getInputString();
+
+        if (!isValidAccount(libraryNumber, password)) {
+            System.out.println("The library number or password is incorrect!");
+            return checkAccount();
+        }
+        return libraryNumber;
+    }
+
+    public List<String> getCheckoutLibraryNum() {
+        return checkoutLibraryNum;
+    }
+
 }

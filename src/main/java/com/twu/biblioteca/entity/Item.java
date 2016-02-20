@@ -4,6 +4,7 @@ public class Item {
     private String name;
     private boolean isAvailable = true;
     private String publish;
+    private String holder;
 
     public String getName() {
         return name;
@@ -27,5 +28,13 @@ public class Item {
 
     public void setPublish(String publish) {
         this.publish = publish;
+    }
+
+    public String getHolder() {
+        return holder;
+    }
+
+    public void setHolder(String holder) {
+        this.holder = holder;
     }
 }
